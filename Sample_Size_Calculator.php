@@ -24,13 +24,16 @@
         var confidence_level = $("#confidence_level").val();
         var confidence_interval = $("#confidence_interval").val();
         var Population = $("#Population").val();
-        var sample_szie = $("#sample_szie").val();
+        if (confidence_level == "" || confidence_interval == "" || Population == "") {
+            alert("請輸入必要資訊");
+            return false;
+        } else {
 
-        var p = 0.5;
-        sample_szie = (Population * p * (1 - p)) / (((Population - 1) * Math.pow(((confidence_interval / 100) / confidence_level), 2)) + p * (1 - p));
-        sample_szie = Math.round(sample_szie);
-        sample_szie = $("#sample_szie").val(sample_szie);
-
+            var sample_szie = $("#sample_szie").val();
+            sample_szie = (Population * p * (1 - p)) / (((Population - 1) * Math.pow(((confidence_interval / 100) / confidence_level), 2)) + p * (1 - p));
+            sample_szie = Math.round(sample_szie);
+            sample_szie = $("#sample_szie").val(sample_szie);
+        }
     }
 </script>
 
@@ -42,7 +45,7 @@
             </tr>
             <tr>
                 <td>
-                    信心水準
+                    *信心水準
                 </td>
                 <td>
                     <input type="radio" value="1.96" id="confidence_level"> 95%
@@ -51,7 +54,7 @@
             </tr>
             <tr>
                 <td>
-                    誤差率
+                    *誤差率
                 </td>
                 <td>
                     <input type="number" id="confidence_interval">
@@ -59,7 +62,7 @@
             </tr>
             <tr>
                 <td>
-                    母體數
+                    *母體數
                 </td>
                 <td>
                     <input type="number" id="Population">
